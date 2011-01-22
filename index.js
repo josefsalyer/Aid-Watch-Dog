@@ -19,11 +19,10 @@ var message = require('message');
 var Message = db.model('Message');
 
 var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
-// app.register(".html", renderer)
+app.register(".html", renderer)
 
 app.configure(function() {
     app.set('views', path.join(__dirname, 'views'))
-    
 })
 
 app.get('/', function(request, response) {
