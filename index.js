@@ -20,9 +20,11 @@ var Message = db.model('Message');
 var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
 app.register(".html", renderer)
 
+app.configure(function() {})
+
 app.get('/', function(request, response) {
     Message.find().all(function(messages){
-        response.render('default.html', {messages:messages})
+        response.render(path.join(__dirname, "views", 'default.html'), {messages:messages})
     })
 })
 
