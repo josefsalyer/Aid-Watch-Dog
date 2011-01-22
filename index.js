@@ -1,9 +1,14 @@
+require.paths.unshift('models','lib');
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose').Mongoose;
-var jqtpl = require('jqtpl')
+mustache = require('./lib/mustache-wrapper')
+var path = require('path');
+var sys = require('sys');
 
-require.paths.unshift('models');
+var renderer = mustache.renderer(path.join(__dirname, 'views', 'partials'))
+
+
 
 var db = mongoose.connect('mongodb://localhost/sms');
 
@@ -12,15 +17,32 @@ var message = require('message');
 var Message = db.model('Message');
 
 var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
-app.set( "view engine", "html" );
-app.register( ".html", require( "jqtpl" ) );
-
+app.register(".html", renderer)
 
 app.get('/', function(request, response) {
     Message.find().all(function(results){
-        response.send(results, 200);
+        response.render('default.html')
     })
     
+})
+
+
+app.get('/locations', function(request, response){
+    response.render('locations.html');
+})
+
+app.get('/locations/:location', function(request, response){
+    response.render('locations.html');
+})
+
+
+
+app.get('/organizations', function(request, response){
+    response.render('organizations.html');
+})
+
+app.get('/organizations/:organization', function(request, response){
+    response.render('organizations.html');
 })
 
 app.post('/message', function(request, response){
