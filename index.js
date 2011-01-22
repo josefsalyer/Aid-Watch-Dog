@@ -1,9 +1,10 @@
-require.paths.unshift('models','lib');
+var path = require('path');
+
+require.paths.unshift(path.join(__dirname, 'models'), path.join(__dirname, 'lib'));
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose').Mongoose;
 mustache = require('./lib/mustache-wrapper')
-var path = require('path');
 var sys = require('sys');
 
 var renderer = mustache.renderer(path.join(__dirname, 'views', 'partials'))
@@ -23,7 +24,10 @@ app.get('/', function(request, response) {
     Message.find().all(function(messages){
         response.render('default.html', {messages:messages})
     })
-    
+})
+
+app.get('/ping', function(request, response) {
+    response.send("pong")
 })
 
 
