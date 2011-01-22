@@ -56,7 +56,14 @@ app.get('/organizations/:organization', function(request, response){
 app.post('/message', function(request, response){
     sys.debug(sys.inspect(request.body));
     var m = new Message();
-    m.message = request.params.message;
+    m._id       = request.body.SmsMessageSid;
+    m.message   = request.body.Body;
+    m.from      = request.body.From;
+    m.sent_at   = new Date();
+    m.city      = request.body.FromCity;
+    m.state     = request.body.FromState;
+    m.zip       = request.body.FromZip;
+    
     m.save(function(){
         response.send("Saved", 200)
     })
