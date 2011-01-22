@@ -24,7 +24,10 @@ app.get('/', function(request, response) {
     Message.find().all(function(results){
         response.render('default.html')
     })
-    
+})
+
+app.get('/ping', function(request, response) {
+    response.send("pong")
 })
 
 
