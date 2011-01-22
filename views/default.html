@@ -1,3 +1,10 @@
 {{#messages}}
-    {{>message}}
+    <div>
+        <p class="message">
+            message: {{message}}<br>
+            id: {{_id}}<br>
+            when: {{sent_at}}<br>
+            where: {{city}} {{state}} {{zip}}
+        </p>
+    </div>
 {{/messages}}
