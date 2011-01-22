@@ -1,9 +1,10 @@
-require.paths.unshift('models','lib');
+var path = require('path');
+
+require.paths.unshift(path.join(__dirname, 'models','lib'));
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose').Mongoose;
 mustache = require('./lib/mustache-wrapper')
-var path = require('path');
 var sys = require('sys');
 
 var renderer = mustache.renderer(path.join(__dirname, 'views', 'partials'))
