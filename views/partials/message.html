@@ -1,8 +1,10 @@
 <div>
-    <p class="message">message
-        {{message}}<br>
-        {{_id}}<br>
+    <p class="message">
+        <a href="/message/{{message_id}}">{{message}}</a><br>
         {{sent_at}}<br>
-        {{city}} {{state}} {{zip}}
+        {{city}} {{state}} {{zip}} {{country}}<br>
+        {{#tags}}
+            <a href="/tag/{{.}}">{{.}}</a>
+        {{/tags}}
     </p>
 </div>

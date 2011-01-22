@@ -27,7 +27,7 @@ app.configure(function() {
 
 app.get('/', function(request, response) {
      Message.find().all(function(messages){
-         response.render(path.join(__dirname, "views", 'default.html'), {messages:messages})
+         response.render(path.join(__dirname, "views", 'default.html'), {messages:messages});
      })
     
 })
@@ -41,19 +41,54 @@ app.get('/partialtest', function(request, response) {
 })
 
 app.get('/locations', function(request, response){
-    response.render('locations.html');
+    Message.find().all(function(messages){
+        response.render(path.join(__dirname, "views", "locations.html"), {messages:messages});
+    })
 })
 
-app.get('/locations/:location', function(request, response){
-    response.render('locations.html');
+app.get('/locations/city/:city', function(request, response){
+    Message.find({city:request.params.city}).all(function(messages){
+        response.render(path.join(__dirname, "views", "locations.html"), {messages:messages});
+    })
 })
+
+app.get('/locations/state/:state', function(request, response){
+    Message.find({state:request.params.state}).all(function(messages){
+        response.render(path.join(__dirname, "views", "locations.html"), {messages:messages});
+    })
+})
+
+app.get('/locations/zip/:zip', function(request, response){
+    Message.find({zip:request.params.zip}).all(function(messages){
+        response.render(path.join(__dirname, "views", "locations.html"), {messages:messages});
+    })
+})
+
+app.get('/locations/country/:country', function(request, response){
+    Message.find({country:request.params.country}).all(function(messages){
+        response.render(path.join(__dirname, "views", "locations.html"), {messages:messages});
+    })
+})
+
 
 app.get('/organizations', function(request, response){
     response.render('organizations.html');
 })
 
 app.get('/organizations/:organization', function(request, response){
-    response.render('organizations.html');
+    response.render('organization.html');
+})
+
+app.get('/tags', function(request, response){
+    response.render('tags.html')
+})
+
+app.get('/tags/:tag', function(request, response){
+    response.render('tag.html')
+})
+
+app.post('/tags/:message_id', function(request, response){
+    response.redirect('tags')
 })
 
 app.post('/message', function(request, response){
@@ -66,6 +101,7 @@ app.post('/message', function(request, response){
     m.city      = request.body.FromCity;
     m.state     = request.body.FromState;
     m.zip       = request.body.FromZip;
+    m.country   = request.body.FromCountry; 
     
     m.save(function(){
         response.send("Saved", 200)
