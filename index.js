@@ -1,16 +1,32 @@
 var express = require('express');
 var connect = require('connect');
 
+
+require.paths.unshift('vendor/mongoose', 'models');
+var mongoose = require('mongoose').Mongoose;
+var db = mongoose.connect('mongodb://localhost/sms');
+
+//add and instantiate models here
+var message = require('message');
+var Message = db.model('Message');
+
 var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
-var messages = []
 
 app.get('/', function(request, response) {
-    response.send(messages, 200);
+    Message.find().all(function(results){
+        response.send(results, 200);
+    })
+    
 })
 
-app.post('/:message', function(request, response){
-    messages.push(request.params.message)
-    response.send(200)
+app.post('/message', function(request, response){
+    
+    var m = new Message();
+    m.message = request.params.message;
+    m.save(function(){
+        response.send("Saved", 200)
+    })
+    
 })
 
 
