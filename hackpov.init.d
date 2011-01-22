@@ -16,8 +16,10 @@
 name="hackpov"
 prog="/var/www/hackpov/run"
 
+
 # Check if requirements are met
 [ -x "$prog" ] || exit 1
+
 
 RETVAL=0
 
