@@ -36,6 +36,9 @@ app.get('/ping', function(request, response) {
     response.send("pong2")
 })
 
+app.get('/partialtest', function(request, response) {
+    response.render('test.html', {stuff:['one', 'two','three']})
+})
 
 app.get('/locations', function(request, response){
     response.render('locations.html');
