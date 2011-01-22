@@ -1,6 +1,7 @@
 var path = require('path');
 
 require.paths.unshift(path.join(__dirname, 'models'), path.join(__dirname, 'lib'));
+
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose').Mongoose;
@@ -18,14 +19,15 @@ var message = require('message');
 var Message = db.model('Message');
 
 var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
-app.register(".html", renderer)
+// app.register(".html", renderer)
 
 app.configure(function() {})
 
 app.get('/', function(request, response) {
-    Message.find().all(function(messages){
-        response.render(path.join(__dirname, "views", 'default.html'), {messages:messages})
-    })
+    // Message.find().all(function(messages){
+    //     response.render(path.join(__dirname, "views", 'default.html'), {messages:messages})
+    // })
+    response.render("test.html")
 })
 
 app.get('/ping', function(request, response) {
