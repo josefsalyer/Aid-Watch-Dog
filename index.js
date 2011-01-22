@@ -1,6 +1,6 @@
 var path = require('path');
 
-require.paths.unshift(path.join(__dirname, 'models','lib'));
+require.paths.unshift(path.join(__dirname, 'models'), path.join(__dirname, 'lib'));
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose').Mongoose;
