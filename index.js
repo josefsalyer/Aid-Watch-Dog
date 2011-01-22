@@ -56,7 +56,7 @@ app.get('/organizations/:organization', function(request, response){
 app.post('/message', function(request, response){
     sys.debug(sys.inspect(request.body));
     var m = new Message();
-    m.message_id= request.body.SmsMessageSid;
+    m.message_id= request.body.SmsMessageSid.toString();
     m.message   = request.body.Body;
     m.from      = request.body.From;
     m.sent_at   = new Date();
