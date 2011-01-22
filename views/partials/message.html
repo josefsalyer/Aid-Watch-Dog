@@ -2,7 +2,7 @@
     <p class="message">
         <a href="/message/{{message_id}}">{{message}}</a><br>
         {{sent_at}}<br>
-        {{city}} {{state}} {{zip}} {{country}}<br>
+            <a href="/locations/city/{{city}}">{{city}}</a> <a href="/locations/state/{{state}}">{{state}}</a> <a href="/locations/zip/{{zip}}">{{zip}}</a> <a href="/locations/country/{{country}}">{{country}}</a><br>
         {{#tags}}
             <a href="/tag/{{.}}">{{.}}</a>
         {{/tags}}
