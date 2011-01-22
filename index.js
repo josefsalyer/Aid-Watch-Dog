@@ -27,7 +27,7 @@ app.get('/', function(request, response) {
 })
 
 app.get('/ping', function(request, response) {
-    response.send("pong")
+    response.send("pong2")
 })
 
 
