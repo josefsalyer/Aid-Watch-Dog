@@ -35,8 +35,6 @@ app.get('/locations/:location', function(request, response){
     response.render('locations.html');
 })
 
-
-
 app.get('/organizations', function(request, response){
     response.render('organizations.html');
 })
@@ -46,7 +44,7 @@ app.get('/organizations/:organization', function(request, response){
 })
 
 app.post('/message', function(request, response){
-    
+    sys.debug(sys.inspect(request.body));
     var m = new Message();
     m.message = request.params.message;
     m.save(function(){
