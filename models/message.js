@@ -24,7 +24,8 @@ var db = mongoose.connect('mongodb://localhost/sms');
 */
 
 mongoose.model('Message', {
-    properties: ['_id', 'message', 'sent_at', 'tags', 'organizations','city','state','zip', 'from' ],
+    properties: ['message_id','message', 'sent_at', 'tags', 'primary_organization', 'lat', 'long', 'organizations', 'city', 'state', 'zip', 'from' ],
+    indexes: ['message_id'],
     methods: {
         save: function(fn){
             this.sent_at = new Date();
