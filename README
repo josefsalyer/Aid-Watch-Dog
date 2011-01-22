@@ -1,2 +1,9 @@
 //required node modules
-npm install express connect mongoose jqtpl
+npm install express connect mongoose mustache
+
+
+express.js
+
+
+Mustache
+https://github.com/janl/mustache.js/
