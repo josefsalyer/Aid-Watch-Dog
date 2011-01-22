@@ -1,0 +1,2 @@
+//required node modules
+npm install express connect mongoose jqtpl

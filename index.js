@@ -1,6 +1,7 @@
 var express = require('express');
 var connect = require('connect');
 var mongoose = require('mongoose').Mongoose;
+var jqtpl = require('jqtpl')
 
 require.paths.unshift('models');
 
