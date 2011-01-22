@@ -1,9 +1,9 @@
 var express = require('express');
 var connect = require('connect');
-
-
-require.paths.unshift('vendor/mongoose', 'models');
 var mongoose = require('mongoose').Mongoose;
+
+require.paths.unshift('models');
+
 var db = mongoose.connect('mongodb://localhost/sms');
 
 //add and instantiate models here
@@ -11,6 +11,9 @@ var message = require('message');
 var Message = db.model('Message');
 
 var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
+app.set( "view engine", "html" );
+app.register( ".html", require( "jqtpl" ) );
+
 
 app.get('/', function(request, response) {
     Message.find().all(function(results){
