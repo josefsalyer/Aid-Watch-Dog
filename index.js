@@ -21,8 +21,8 @@ var app = express.createServer(connect.bodyDecoder(), connect.methodOverride());
 app.register(".html", renderer)
 
 app.get('/', function(request, response) {
-    Message.find().all(function(results){
-        response.render('default.html')
+    Message.find().all(function(messages){
+        response.render('default.html', {messages:messages})
     })
 })
 
