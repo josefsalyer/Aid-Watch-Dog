@@ -26,10 +26,10 @@ app.configure(function() {
 })
 
 app.get('/', function(request, response) {
-    // Message.find().all(function(messages){
-    //     response.render(path.join(__dirname, "views", 'default.html'), {messages:messages})
-    // })
-    response.render("test.html")
+     Message.find().all(function(messages){
+         response.render(path.join(__dirname, "views", 'default.html'), {messages:messages})
+     })
+    
 })
 
 app.get('/ping', function(request, response) {
