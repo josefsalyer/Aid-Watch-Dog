@@ -5,14 +5,7 @@
     <title>Aid Watch Dog Message Poster</title>       
 
 	<script language="javascript" type="text/javascript">
-function submitForm() 
-{
- var host = document.getElementById('host').value;
- var port = document.getElementById('port').value;
- var form = document.forms["messageform"];
- form.action = "http://"+host+":"+port+"/Message";
- form.submit();
-}
+
 	</script>
 
 
@@ -25,36 +18,59 @@ function submitForm()
 	host: <input type="text" size="20" value="localhost" id="host"><br/>
 	port: <input type="text" size="6" value="6001" id="port"><br/>
     <h2>Post new message</h2>
-	<form id="messageform" id="messageform" method="post" ><br/>
+	<form id="messageform" id="messageform" method="post" target="results" ><br/>
 		<table>
 			<tr><td>AccountSid: </td><td><input type="text" size="40" value="AC4daa1a1f7ac808f5c7dc9b04616c5608" name="AccountSid"></td></tr>
-			<tr><td>Body: </td><td><textarea rows="3" cols="54"  name="Body">Help my house is on fire!</textarea></td></tr>
+			<tr><td>Body: </td><td><textarea rows="2" cols="54"  name="Body" onKeyDown="limitText(this,160);" onKeyUp="limitText(this,160);">Help my house is on fire!</textarea></td></tr>
 			<tr><td>ToZip: </td><td><input type="text" size="10" value="84015" name="ToZip"></td></tr>
 			<tr><td>FromState: </td><td><input type="text" size="3" value="AZ" name="FromState"></td></tr>
 			<tr><td>ToCity: </td><td><input type="text" size="20" value="CLEARFIELD" name="ToCity"></td></tr>
 			<tr><td>SmsSid: </td><td><input type="text" size="40" value="" name="SmsSid" id="SmsSid"></td></tr>
 			<tr><td>ToState: </td><td><input type="text" size="3" value="UT" name="ToState"></td></tr>
-			<tr><td>To: </td><td><input type="text" size="40" value="+18017843577" name="To"></td></tr>
+			<tr><td>To: </td><td><input type="text" size="15" value="+18017843577" name="To"></td></tr>
 			<tr><td>ToCountry: </td><td><input type="text" size="10" value="US" name="ToCountry"></td></tr>
 			<tr><td>FromCountry: </td><td><input type="text" size="10" value="US" name="FromCountry"></td></tr>
 			<tr><td>SmsMessageSid:&nbsp;&nbsp;</td><td><input type="text" size="40" value="" name="SmsMessageSid" id="SmsMessageSid"></td></tr>
 			<tr><td>ApiVersion: </td><td><input type="text" size="11" value="2010-04-01" name="ApiVersion"></td></tr>
-			<tr><td>FromCity: </td><td><input type="text" size="40" value="PHOENIX" name="FromCity"></td></tr>
-			<tr><td>SmsStatus: </td><td><input type="text" size="40" value="received" name="SmsStatus"></td></tr>
-			<tr><td>From: </td><td><input type="text" size="40" value="+14802865875" name="From"></td></tr>
-			<tr><td>FromZip: </td><td><input type="text" size="40" value="85003" name="FromZip"></td></tr>
+			<tr><td>FromCity: </td><td><input type="text" size="20" value="PHOENIX" name="FromCity"></td></tr>
+			<tr><td>SmsStatus: </td><td><input type="text" size="10" value="received" name="SmsStatus"></td></tr>
+			<tr><td>From: </td><td><input type="text" size="15" value="+14802865875" name="From"></td></tr>
+			<tr><td>FromZip: </td><td><input type="text" size="10" value="85003" name="FromZip"></td></tr>
 			<tr><td>&nbsp;</td></tr>
-			<tr><td><input type="button" value="Submit Post" name="submitmessage" onClick="submitForm()"> </td></tr>
+			<tr><td><input type="button" value="Submit Post" name="submitmessage" onClick="submitForm()"> <input type="button" value="Gen Ids" onClick="genIds()" /></td></tr>
+			
 		</table>
 	</form>
+	<h2>Results</h2>
+	<iframe width="435" height="300" frameborder="1" name="results" id="results" ></iframe>
 </body>
 	<script>
+function submitForm() 
+{
+ var host = document.getElementById('host').value;
+ var port = document.getElementById('port').value;
+ var form = document.forms["messageform"];
+ form.action = "http://"+host+":"+port+"/Message";
+ form.submit();
+}
+
+function limitText(limitField, limitNum) {
+    if (limitField.value.length > limitNum) 
+	{
+        limitField.value = limitField.value.substring(0, limitNum);
+    } 
+}
+
 function S4() 
 {
-return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
 }
+function genIds()
+{
 var Sid = "SM"+S4()+S4()+S4()+S4()+S4()+S4()+S4()+S4();
 document.getElementById('SmsMessageSid').value = Sid;
 document.getElementById('SmsSid').value = Sid;
+}
+genIds();
 	</script>
 </html>
